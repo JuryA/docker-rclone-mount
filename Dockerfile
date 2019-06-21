@@ -7,7 +7,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENV S6_KEEP_ENV=1
 
 RUN apk update && apk upgrade
-RUN apk add fuse
+RUN apk add fuse ca-certificates
 RUN apk add --virtual build-dependencies wget curl unzip
 
 WORKDIR /root
