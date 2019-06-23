@@ -1,6 +1,8 @@
 FROM alpine:latest
 MAINTAINER bulzipke <bulzipke@naver.com>
 
+RUN addgroup -S ocaml && adduser -S ocaml -G ocaml
+
 # reference from tynor88/docker-rclone-mount
 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
