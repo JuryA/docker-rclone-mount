@@ -8,4 +8,4 @@ fi
 mount_command="rclone mount --config=/config/.rclone.conf --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
 
 echo "Executing => $mount_command"
-exec s6-setuidgid root $mount_command
+exec s6-setuidgid abc $mount_command
