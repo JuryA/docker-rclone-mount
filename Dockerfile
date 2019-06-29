@@ -27,7 +27,7 @@ RUN chmod 755 /usr/bin/rclone
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 WORKDIR /
-RUN mkdir -p /rclone /data
+RUN mkdir -p /rclone /data /config
 
 COPY rootfs /
 
