@@ -5,8 +5,6 @@ if [ -z "$RCLONE_REMOTE_MOUNT" ]; then
   exit 1
 fi
 
-cache-dir
-
 mount_command="rclone mount --config=/config/.rclone.conf --cache-dir ~/.cache/rclone/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
 
 echo "Executing => $mount_command"
