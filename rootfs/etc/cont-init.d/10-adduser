@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv sh
+
+if [ ! "$(id -u abc)" -eq "$UID" ]; then
+  usermod -o -u "$UID" abc;
+fi
+
+if [ ! "$(id -g abc)" -eq "$GID" ]; then
+  groupmod -o -g "$GID" abc;
+fi
+
+chown abc:abc /config
