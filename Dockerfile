@@ -2,9 +2,10 @@ FROM alpine:latest
 MAINTAINER bulzipke <bulzipke@naver.com>
 
 # reference from tynor88/docker-rclone-mount
-
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENV S6_KEEP_ENV=1
+ENV UID=1000
+ENV GID=1000
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates
