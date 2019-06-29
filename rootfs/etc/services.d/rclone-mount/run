@@ -7,7 +7,7 @@ fi
 
 cache-dir
 
-mount_command="rclone mount --config=/config/.rclone.conf --cache-dir ~/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
+mount_command="rclone mount --config=/config/.rclone.conf --cache-dir ~/.cache/rclone/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
 
 echo "Executing => $mount_command"
 exec s6-setuidgid abc $mount_command
