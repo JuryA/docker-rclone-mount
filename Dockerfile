@@ -27,16 +27,8 @@ RUN chmod 755 /usr/bin/rclone
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 WORKDIR /
-RUN id
-RUN addgroup -S abc -g 1000
-RUN id
-RUN adduser -S abc -G abc -u 1000
+RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
 RUN mkdir -p /rclone /data /config
-
-RUN \
-	groupmod -g 1000 users && \
-	useradd -u 911 -U -d /config -s /bin/false abc && \
-	usermod -G users abc && \
 
 COPY rootfs /
 
