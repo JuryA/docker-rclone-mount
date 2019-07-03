@@ -13,7 +13,7 @@ fi
 cp /config/.rclone.conf /home/abc/.rclone.conf
 chown abc:abc /home/abc/.rclone.conf
 
-mount_command="rclone mount --config=/home/abc/.rclone.conf --cache-dir ~/.cache/rclone/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
+mount_command="rclone mount --config=/home/abc/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
 
 echo "Executing => $mount_command"
 exec s6-setuidgid abc $mount_command
