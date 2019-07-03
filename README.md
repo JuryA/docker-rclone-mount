@@ -12,3 +12,27 @@ Rclone Docker image based on Alpine Linux
         -v /your_host_folder/cache:/rclone \
         -v /your_host_folder/data:/data:shared \
         -d bulzipke/rclone-mount:latest
+
+# .rclone.conf Sample:
+    [GoogleDrive]
+    type = drive
+    client_id = your_client_id
+    client_secret = your_client_secret
+    scope = drive
+    token = your_token
+    chunk_size = 256M
+    
+    [Cache]
+    type = cache
+    remote = GoogleDrive:
+    chunk_size = 1M
+    info_age = 1M
+    chunk_total_size = 500G
+    workers = 20
+    db_path = /rclone
+    chunk_path = /rclone/tmp
+    rps = 10
+    writes = false
+    tmp_upload_path = /rclone/upload
+    tmp_wait_time = 1h0m0s
+    db_wait_time = 1m
