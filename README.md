@@ -13,7 +13,7 @@ Rclone Docker image based on Alpine Linux
         -v /your_host_folder/data:/data:shared \
         -d bulzipke/rclone-mount:latest
 
-# .rclone.conf Sample:
+# Recommend .rclone.conf Sample:
     [GoogleDrive]
     type = drive
     client_id = your_client_id
