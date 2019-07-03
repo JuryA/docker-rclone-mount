@@ -29,4 +29,4 @@ COPY rootfs /
 
 RUN apk del build-dependencies
 
-ENTRYPOINT ["/bin/s6-svscan"]
+ENTRYPOINT ["/etc/s6/init/init-stage1"]
