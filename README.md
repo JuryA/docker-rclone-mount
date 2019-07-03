@@ -2,7 +2,6 @@
 Rclone Docker image based on Alpine Linux
 
 # Usage Example:
-
     docker run -d --name rclone \
         --cap-add SYS_ADMIN \
         --device /dev/fuse \
