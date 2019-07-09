@@ -9,3 +9,4 @@ if [ ! "$(id -g abc)" -eq "$GID" ]; then
 fi
 
 chown abc:abc /cache /data /config
+chown abc:abc /data2
