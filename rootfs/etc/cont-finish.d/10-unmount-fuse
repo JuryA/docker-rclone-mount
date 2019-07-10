@@ -2,4 +2,4 @@
 
 # unmount fuse
 fusermount -u -z /data
-
+fusermount -u -z /rclone/remote
