@@ -20,17 +20,13 @@ RUN rm -rf s6-overlay.tar.gz
 RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/mergerfs/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
 tar xfz mergerfs.tar.gz
-RUN pwd && ls -l 
 RUN rm -rf mergerfs.tar.gz
-RUN pwd && ls -l 
 RUN make -C mergerfs*
-RUN pwd && ls -l 
-RUN mv mergerfs*/build/mergerfs /usr/bin/
-RUN pwd && ls -l 
+RUN pwd && ls -l && ls -l mergerfs*/build/
+RUN mv mergerfs*/build/mergerfs /usr/bin/mergerfs
+RUN pwd && ls -l && ls -l /usr/bin/
 RUN rm -rf mergerfs*
-RUN pwd && ls -l 
 RUN chmod 755 /usr/bin/mergerfs
-RUN pwd && ls -l 
 
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
 RUN unzip rclone-current-linux-amd64.zip
