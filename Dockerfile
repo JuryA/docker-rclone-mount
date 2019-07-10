@@ -36,6 +36,7 @@ RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 WORKDIR /
 RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
+RUN mkdir -p /rclone
 RUN mkdir -p /cache /data /config
 RUN mkdir -p /data2
 
