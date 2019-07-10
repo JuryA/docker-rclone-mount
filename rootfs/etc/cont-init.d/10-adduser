@@ -8,6 +8,6 @@ if [ ! "$(id -g abc)" -eq "$GID" ]; then
   groupmod -o -g "$GID" abc;
 fi
 
-chown abc:abc /rclone
+chown -R abc:abc /rclone
 chown abc:abc /cache /data /config
 chown abc:abc /data2
