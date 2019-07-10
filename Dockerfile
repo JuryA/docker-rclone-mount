@@ -9,7 +9,7 @@ ENV GID=1000
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates shadow
-RUN apk add --virtual build-dependencies wget curl unzip
+RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
@@ -21,12 +21,17 @@ RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/merge
 curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
 tar xfz mergerfs.tar.gz -C /
 RUN rm -rf mergerfs.tar.gz
+RUN cd mergerfs*
+RUN make
+RUN mv build/mergerfs /usr/bin/
+RUN cd ..
+RUN rm -rf mergerfs*
+RUN chmod 755 /usr/bin/mergerfs
 
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
 RUN unzip rclone-current-linux-amd64.zip
 RUN mv rclone-*-linux-amd64/rclone /usr/bin/
 RUN rm -rf rclone*
-RUN chown root:root /usr/bin/rclone
 RUN chmod 755 /usr/bin/rclone
 
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
