@@ -5,15 +5,14 @@ if [ -z "$RCLONE_REMOTE_MOUNT" ]; then
   exit 1
 fi
 
-if [ ! -f /config/.rclone.conf ]; then
-  echo "Error: /config/.rclone.conf does not exist. You have to pass it from the host."
+if [ ! -f /rclone/.rclone.conf ]; then
+  echo "Error: /rclone/.rclone.conf does not exist. You have to pass it from the host."
   exit 1
 fi
 
-cp /config/.rclone.conf /home/abc/.rclone.conf
-chown abc:abc /home/abc/.rclone.conf
+chown abc:abc /rclone/.rclone.conf
 
-mount_command="rclone mount --config=/home/abc/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /data"
+mount_command="rclone mount --config=/rclone/.rclone.conf --allow-other --log-level INFO --log-file /rclone/rclone.log $RCLONE_MOUNT_OPTIONS $RCLONE_REMOTE_MOUNT /rclone/mount"
 
 echo "Executing => $mount_command"
 exec s6-setuidgid abc $mount_command
