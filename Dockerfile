@@ -17,6 +17,11 @@ curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/rele
 tar xfz s6-overlay.tar.gz -C / 
 RUN rm -rf s6-overlay.tar.gz
 
+RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/mergerfs/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
+curl -o mergerfs.tar.gz -L"https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-2.28.1.tar.gz" && \
+tar xfz mergerfs.tar.gz -C /
+RUN rm -rf mergerfs.tar.gz
+
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
 RUN unzip rclone-current-linux-amd64.zip
 RUN mv rclone-*-linux-amd64/rclone /usr/bin/
