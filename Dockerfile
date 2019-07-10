@@ -21,6 +21,8 @@ RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/merge
 curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
 tar xfz mergerfs.tar.gz -C /
 RUN rm -rf mergerfs.tar.gz
+RUN pwd
+RUN ls -l
 RUN make -C mergerfs*
 RUN mv mergerfs*/build/mergerfs /usr/bin/
 RUN rm -rf mergerfs*
