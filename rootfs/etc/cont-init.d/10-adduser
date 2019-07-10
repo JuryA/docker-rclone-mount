@@ -8,6 +8,9 @@ if [ ! "$(id -g abc)" -eq "$GID" ]; then
   groupmod -o -g "$GID" abc;
 fi
 
-mkdir -p /rclone/mount
+mkdir -p /rclone/remote
+mkdir -p /rclone/local
+mkdir /data
 
 chown -R abc:abc /rclone
+chown abc:abc /data
