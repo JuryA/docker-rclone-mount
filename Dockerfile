@@ -21,10 +21,10 @@ RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/merge
 curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
 tar xfz mergerfs.tar.gz -C /
 RUN rm -rf mergerfs.tar.gz
-RUN cd mergerfs*
+WORKDIR /root/mergerfs-${MERGERFS_VERSION}
 RUN make
 RUN mv build/mergerfs /usr/bin/
-RUN cd ..
+WORKDIR /root
 RUN rm -rf mergerfs*
 RUN chmod 755 /usr/bin/mergerfs
 
