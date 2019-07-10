@@ -1,5 +1,4 @@
 #!/usr/bin/with-contenv sh
 
 # unmount fuse
-echo "Unmounting mergerfs"
 fusermount -u -z /data
