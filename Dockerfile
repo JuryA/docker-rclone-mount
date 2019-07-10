@@ -19,12 +19,11 @@ RUN rm -rf s6-overlay.tar.gz
 
 RUN MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/mergerfs/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
-tar xfz mergerfs.tar.gz -C /
-RUN rm -rf mergerfs.tar.gz
-WORKDIR /root/mergerfs-${MERGERFS_VERSION}
-RUN make
-RUN mv build/mergerfs /usr/bin/
-WORKDIR /root
+tar xfz mergerfs.tar.gz -C / && \
+rm -rf mergerfs.tar.gz && \
+cd mergerfs* && \
+make
+RUN mv mergerfs*/build/mergerfs /usr/bin/
 RUN rm -rf mergerfs*
 RUN chmod 755 /usr/bin/mergerfs
 
