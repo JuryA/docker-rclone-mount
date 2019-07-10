@@ -8,7 +8,7 @@ ENV UID=1000
 ENV GID=1000
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow
+RUN apk add fuse ca-certificates shadow libgcc libstdc++
 RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
@@ -22,9 +22,7 @@ curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/downlo
 tar xfz mergerfs.tar.gz
 RUN rm -rf mergerfs.tar.gz
 RUN make -C mergerfs*
-RUN pwd && ls -l && ls -l mergerfs*/build/
 RUN mv mergerfs*/build/mergerfs /usr/bin/mergerfs
-RUN pwd && ls -l && ls -l /usr/bin/
 RUN rm -rf mergerfs*
 RUN chmod 755 /usr/bin/mergerfs
 
