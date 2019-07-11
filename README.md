@@ -22,8 +22,10 @@ Rclone Docker image based on Alpine Linux
 ### Reference   
 * [animosity22/homescripts][0]
 * [tynor88/docker-rclone-mount][1]
-* [trapexit/mergerfs][2]
+* [jdavis92/rclone-mount][2]
+* [trapexit/mergerfs][3]
 
 [0]: https://github.com/animosity22/homescripts
 [1]: https://github.com/tynor88/docker-rclone-mount
-[2]: https://github.com/trapexit/mergerfs 
+[2]: https://github.com/jdavis92/rclone-mount
+[3]: https://github.com/trapexit/mergerfs 
