@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv sh
+
+mkdir -p /rclone/remote
+mkdir -p /rclone/local
+mkdir -p /rclone/data
+
+chown -R abc:abc /rclone
