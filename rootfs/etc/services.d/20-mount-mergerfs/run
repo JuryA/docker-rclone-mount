@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-s6-svwait -u /etc/services.d/10-mount-rclone
+s6-svwait -u /var/run/s6/services/10-mount-rclone
 rclone rc vfs/refresh recursive=true
 
 mount_command="mergerfs -f -o async_read=false,use_ino,allow_other,auto_cache,func.getattr=newest,category.action=all,category.create=ff /rclone/local=RW:/rclone/remote=RO /rclone/data"
