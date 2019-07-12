@@ -38,4 +38,4 @@ COPY rootfs /
 
 RUN apk del build-dependencies
 
-CMD ["/bin/s6-svscan", "/etc/services.d"]
+ENTRYPOINT ["/init"]
