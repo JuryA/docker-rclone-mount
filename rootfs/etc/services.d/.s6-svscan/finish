@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv sh
-
-if [ 1 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; then
-  umount -f /rclone/data
-fi
-
-if [ 1 -eq `ps -ef | grep abc | grep "rclone mount" | wc -l` ]; then
-  umount -f /rclone/remote
-fi
