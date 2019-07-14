@@ -5,8 +5,8 @@ ENV UID=1000
 ENV GID=1000
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow python3 libgcc libstdc++
-RUN apk add --virtual build-dependencies wget curl unzip git build-base linux-headers
+RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++
+RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
