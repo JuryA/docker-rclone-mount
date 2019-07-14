@@ -14,8 +14,8 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   jq .core.rclone_binary_path="\"/usr/bin/rclone\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   jq .hidden={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
-  jq .nzbget="{\"enabled\": false}" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
-  jq .plex="{\"enabled\": false}" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .remotes={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .uploader={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   chown abc:abc $CLOUDPLOW_CONFIG
 fi
 
