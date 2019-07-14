@@ -5,7 +5,7 @@ ENV UID=1000
 ENV GID=1000
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++
+RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq
 RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
