@@ -5,8 +5,8 @@ ENV UID=1000
 ENV GID=1000
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow libgcc libstdc++
-RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
+RUN apk add fuse ca-certificates shadow python3 libgcc libstdc++
+RUN apk add --virtual build-dependencies wget curl unzip git build-base linux-headers
 
 WORKDIR /root
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
@@ -28,6 +28,11 @@ RUN unzip rclone-current-linux-amd64.zip
 RUN mv rclone-*-linux-amd64/rclone /usr/bin/
 RUN rm -rf rclone*
 RUN chmod 755 /usr/bin/rclone
+
+RUN git clone https://github.com/l3uddz/cloudplow /opt/cloudplow
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade -r /opt/cloudplow/requirements.txt
+RUN ln -s /opt/cloudplow/cloudplow.py /usr/local/bin/cloudplow
 
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
