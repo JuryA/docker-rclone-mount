@@ -16,6 +16,7 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   jq .hidden={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
 
   jq .remotes={\"${RCLONE_REMOTE::-1}\":{\
+\"rclone_excludes\":[],\
 \"rclone_command\":\"move\",\
 \"remove_empty_dir_depth\":2,\
 \"rclone_extras\":{\
