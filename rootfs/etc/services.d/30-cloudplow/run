@@ -33,6 +33,7 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 \"check_interval\":30,\
 \"exclude_open_files\":true,\
 \"max_size_gb\":100,\
+\"size_excludes\":[]\
 }} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   
   chown abc:abc $CLOUDPLOW_CONFIG
