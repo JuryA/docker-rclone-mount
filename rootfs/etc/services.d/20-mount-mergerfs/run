@@ -8,6 +8,7 @@ echo "Found rclone mount done."
 
 echo "Preparing mount cache..."
 rclone rc --no-output vfs/refresh recursive=true
+echo "Ready to use rclone with cache."
 
 mount_command="mergerfs -f -o async_read=false,use_ino,allow_other,auto_cache,func.getattr=newest,category.action=all,category.create=ff /rclone/local:/rclone/remote /rclone/data"
 
