@@ -17,6 +17,7 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 
   jq .remotes={\"${RCLONE_REMOTE::-1}\":{\
 \"rclone_command\":\"move\",\
+\"remove_empty_dir_depth\":2,\
 \"rclone_extras\":{\
 \"--checkers\":16,\
 \"--drive-chunk-size\":\"64M\",\
