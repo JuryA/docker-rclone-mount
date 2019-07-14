@@ -11,8 +11,9 @@ echo "Waiting mergerfs mount done."
 if [ ! -f $CLOUDPLOW_CONFIG ]; then
   echo "First run initializing cloudplow..."
   s6-setuidgid abc cloudplow run
-  s6-setuidgid abc jq .core.rclone_binary_path="\"/usr/bin/rclone\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
-  s6-setuidgid abc jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .core.rclone_binary_path="\"/usr/bin/rclone\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  chown abc:abc $CLOUDPLOW_CONFIG
 fi
 
 echo "Executing cloudplow for remote upload"
