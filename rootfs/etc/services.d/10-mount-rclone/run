@@ -10,7 +10,7 @@ if [ ! -f /rclone/.rclone.conf ]; then
   exit 1
 fi
 
-mount_command="rclone mount --config=/rclone/.rclone.conf --allow-other --log-level INFO --log-file /rclone/rclone.log --rc $RCLONE_OPTIONS $RCLONE_REMOTE RCLONE_REMOTE_MOUNT"
+mount_command="rclone mount --config=/rclone/.rclone.conf --allow-other --log-level INFO --log-file /rclone/rclone.log --rc $RCLONE_OPTIONS $RCLONE_REMOTE $RCLONE_REMOTE_MOUNT"
 
 echo "Executing mount rclone => $mount_command"
 exec s6-setuidgid abc $mount_command
