@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv sh
+
+while [ 0 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; do
+  sleep 1
+  echo "Waiting mergerfs mount..."
+done
+
+if [ ! -f /opt/cloudplow/config.json ]; then
+  echo "First run initializing cloudplow..."
+  exec s6-setuidgid abc cloudplow run
+  exit 1
+fi
+
+echo "Executing cloudplow for remote upload"
+exec s6-setuidgid abc cloudplow run
