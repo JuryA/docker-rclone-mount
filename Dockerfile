@@ -8,7 +8,7 @@ ENV RCLONE_REMOTE_MOUNT=/rclone/remote
 ENV DATA_MOUNT=/rclone/data
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq
+RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq coreutils
 RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
