@@ -1,12 +1,16 @@
 #!/usr/bin/with-contenv sh
 
+CLOUDPLOW_CONFIG="/opt/cloudplow/config.json"
+
 while [ 0 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; do
   sleep 1
   echo "Waiting mergerfs mount..."
 done
 
-if [ ! -f /opt/cloudplow/config.json ]; then
+if [ ! -f $CLOUDPLOW_CONFIG ]; then
   echo "First run initializing cloudplow..."
+  exec s6-setuidgid abc jq .core.rclone_binary_path="\"/usr/bin/rclone\"" $CLOUDPLOW_CONFIG > $CLOUDPLOW_CONFIG
+  exec s6-setuidgid abc jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > $CLOUDPLOW_CONFIG
   exec s6-setuidgid abc cloudplow run
   exit 1
 fi
