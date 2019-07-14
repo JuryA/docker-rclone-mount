@@ -19,7 +19,7 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 \"rclone_excludes\":[],\
 \"rclone_sleeps\":{},\
 \"rclone_command\":\"move\",\
-\"remove_empty_dir_depth\":2,\
+\"remove_empty_dir_depth\":1,\
 \"rclone_extras\":{\
 \"--checkers\":16,\
 \"--drive-chunk-size\":\"64M\",\
