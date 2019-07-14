@@ -4,11 +4,11 @@ echo "Waiting rclone mount..."
 while [ 0 -eq `netstat -a | grep 5572 | grep LISTEN | wc -l` ]; do
   sleep 1
 done
-echo "Found rclone mount done."
+echo "Waiting rclone mount done."
 
 echo "Preparing mount cache..."
 rclone rc --no-output vfs/refresh recursive=true
-echo "Ready to use rclone with cache."
+echo "Preparing mount cache done."
 
 mount_command="mergerfs -f -o async_read=false,use_ino,allow_other,auto_cache,func.getattr=newest,category.action=all,category.create=ff /rclone/local:/rclone/remote /rclone/data"
 
