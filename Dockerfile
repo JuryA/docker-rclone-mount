@@ -3,6 +3,8 @@ MAINTAINER bulzipke <bulzipke@naver.com>
 
 ENV UID=1000
 ENV GID=1000
+ENV RCLONE_DRIVE
+ENV RCLONE_CACHE
 ENV MERGERFS_LOCAL_MOUNT=/rclone/local
 ENV RCLONE_REMOTE_MOUNT=/rclone/remote
 ENV DATA_MOUNT=/rclone/data
