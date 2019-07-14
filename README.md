@@ -6,8 +6,8 @@ Rclone Docker image based on Alpine Linux
         --cap-add SYS_ADMIN \
         --device /dev/fuse \
         --security-opt apparmor:unconfined \
-        -e RCLONE_REMOTE_MOUNT="GoogleDrive:" \
-        -e RCLONE_MOUNT_OPTIONS="--buffer-size 1G --dir-cache-time 96h --drive-chunk-size 32M --timeout 1h --rc" \
+        -e RCLONE_REMOTE="GoogleDrive:" \
+        -e RCLONE_OPTIONS="--buffer-size 1G --dir-cache-time 96h --drive-chunk-size 32M --timeout 1h" \
         -v /your_host_folder/rclone:/rclone \
         -d bulzipke/rclone-mount:experimental
 

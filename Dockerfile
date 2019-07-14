@@ -3,6 +3,9 @@ MAINTAINER bulzipke <bulzipke@naver.com>
 
 ENV UID=1000
 ENV GID=1000
+ENV MERGERFS_LOCAL_MOUNT=/rclone/local
+ENV RCLONE_REMOTE_MOUNT=/rclone/remote
+ENV DATA_MOUNT=/rclone/data
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq

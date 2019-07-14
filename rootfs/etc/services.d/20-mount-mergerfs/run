@@ -10,7 +10,7 @@ echo "Preparing mount cache..."
 rclone rc --no-output vfs/refresh recursive=true
 echo "Preparing mount cache done."
 
-mount_command="mergerfs -f -o async_read=false,use_ino,allow_other,auto_cache,func.getattr=newest,category.action=all,category.create=ff /rclone/local:/rclone/remote /rclone/data"
+mount_command="mergerfs -f -o async_read=false,use_ino,allow_other,auto_cache,func.getattr=newest,category.action=all,category.create=ff $MERGERFS_LOCAL_MOUNT:$RCLONE_REMOTE_MOUNT $DATA_MOUNT"
 
 echo "Executing mount mergerfs => $mount_command"
 exec s6-setuidgid abc $mount_command
