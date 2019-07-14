@@ -6,7 +6,7 @@ echo "Waiting mergerfs mount..."
 while [ 0 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; do
   sleep 1
 done
-echo "Found mergerfs mount done."
+echo "Waiting mergerfs mount done."
 
 if [ ! -f $CLOUDPLOW_CONFIG ]; then
   echo "First run initializing cloudplow..."
