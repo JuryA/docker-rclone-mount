@@ -18,12 +18,13 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   jq .remotes={\"${RCLONE_DRIVE::-1}\":{\
 \"rclone_excludes\":[],\
 \"rclone_sleeps\":{},\
-\"rclone_command\":\"copy\",\
+\"rclone_command\":\"move\",\
 \"remove_empty_dir_depth\":1,\
 \"rclone_extras\":{\
 \"--checkers\":16,\
 \"--drive-chunk-size\":\"64M\",\
 \"--skip-links\":null,\
+\"--delete-empty-src-dirs\":null,\
 \"--fast-list\":null,\
 \"--stats\":\"60s\",\
 \"--transfers\":8,\
