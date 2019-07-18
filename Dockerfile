@@ -36,14 +36,14 @@ RUN rm -rf rclone*
 RUN chmod 755 /usr/bin/rclone
 
 RUN git clone https://github.com/l3uddz/cloudplow /opt/cloudplow
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade -r /opt/cloudplow/requirements.txt
 RUN ln -s /opt/cloudplow/cloudplow.py /usr/local/bin/cloudplow
 
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 WORKDIR /
 RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
-RUN s6-setuidgid abc pip3 install --upgrade pip
-RUN s6-setuidgid abc pip3 install --upgrade -r /opt/cloudplow/requirements.txt
 
 COPY rootfs /
 
