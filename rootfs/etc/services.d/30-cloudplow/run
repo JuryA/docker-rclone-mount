@@ -45,4 +45,4 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 fi
 
 echo "Executing cloudplow for remote upload"
-exec s6-setuidgid abc cloudplow run --loglevel INFO --logfile /rclone/cloudplow.log
+# exec s6-setuidgid abc cloudplow run --loglevel INFO --logfile /rclone/cloudplow.log
