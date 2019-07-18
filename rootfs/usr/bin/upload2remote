@@ -1,0 +1,10 @@
+#!/bin/bash
+# #!/usr/bin/with-contenv sh
+
+if [[ "`pidof -x $(basename $0) -o %PPID`" ]]; then
+  exit;
+fi
+
+s6-setuidgid abc cloudplow upload --loglevel INFO --logfile /rclone/cloudplow.log
+rclone rc --no-output vfs/refresh recursive=true
+# s6-setuidgid abc cloudplow upload --loglevel INFO --logfile /rclone/cloudplow.log

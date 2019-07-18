@@ -44,5 +44,8 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   chown abc:abc $CLOUDPLOW_CONFIG
 fi
 
-echo "Executing cloudplow for remote upload"
-exec s6-setuidgid abc cloudplow run --loglevel INFO --logfile /rclone/cloudplow.log
+echo "$UPLOAD_PERIOD /usr/bin/upload2remote" > /var/spool/cron/crontabs/abc
+chown abc:abc /var/spool/cron/crontabs/abc
+
+echo "Executing mergerfs with crond for remote upload"
+exec s6-setuidgid abc crond -f -l 0 -L /rclone/cron.log
