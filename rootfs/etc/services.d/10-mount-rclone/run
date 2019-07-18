@@ -15,7 +15,8 @@ if [ ! -f /rclone/.rclone.conf ]; then
   exit 1
 fi
 
-mount_command="rclone mount --config=/rclone/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other --log-level INFO --log-file /rclone/rclone.log --rc $RCLONE_OPTIONS $RCLONE_CACHE $RCLONE_REMOTE_MOUNT"
+# mount_command="rclone mount --config=/rclone/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other --log-level INFO --log-file /rclone/rclone.log --rc $RCLONE_OPTIONS $RCLONE_CACHE $RCLONE_REMOTE_MOUNT"
+mount_command="rclone mount --config=/rclone/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other -vvv --rc $RCLONE_OPTIONS $RCLONE_CACHE $RCLONE_REMOTE_MOUNT"
 
 echo "Executing mount rclone => $mount_command"
 exec s6-setuidgid abc $mount_command
