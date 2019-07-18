@@ -2,11 +2,11 @@
 
 CLOUDPLOW_CONFIG="/opt/cloudplow/config.json"
 
-echo "Waiting mergerfs mount..."
+# echo "Waiting mergerfs mount..."
 while [ 0 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; do
-  sleep 9999999999
+  sleep 1
 done
-echo "Waiting mergerfs mount done."
+# echo "Waiting mergerfs mount done."
 
 if [ ! -f $CLOUDPLOW_CONFIG ]; then
   echo "First run initializing cloudplow..."
@@ -44,5 +44,5 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   chown abc:abc $CLOUDPLOW_CONFIG
 fi
 
-echo "Executing cloudplow for remote upload"
+# echo "Executing cloudplow for remote upload"
 # exec s6-setuidgid abc cloudplow run --loglevel INFO --logfile /rclone/cloudplow.log
