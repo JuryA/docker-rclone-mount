@@ -11,7 +11,7 @@ ENV DATA_MOUNT=/rclone/data
 ENV UPLOAD_PERIOD="* * * * *"
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq coreutils
+RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq coreutils procps
 RUN apk add --virtual build-dependencies wget curl unzip build-base linux-headers
 
 WORKDIR /root
