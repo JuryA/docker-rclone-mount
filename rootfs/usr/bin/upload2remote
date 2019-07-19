@@ -1,6 +1,11 @@
 #!/usr/bin/with-contenv sh
 
-ps -ef | grep `basename $0` | grep -v $$ > /dev/null
+ps -ef | grep "cloudplow upload" | grep -v grep > /dev/null
+if [ $? -eq 0 ]; then
+  exit
+fi
+
+ps -ef | grep "rclone rc" | grep -v grep > /dev/null
 if [ $? -eq 0 ]; then
   exit
 fi
