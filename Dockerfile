@@ -8,7 +8,7 @@ ENV RCLONE_CACHE=""
 ENV MERGERFS_LOCAL_MOUNT=/rclone/local
 ENV RCLONE_REMOTE_MOUNT=/rclone/remote
 ENV DATA_MOUNT=/rclone/data
-ENV UPLOAD_PERIOD="* * * * *"
+ENV UPLOAD_PERIOD="*/30 * * * *"
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates shadow python3 git libgcc libstdc++ jq coreutils
