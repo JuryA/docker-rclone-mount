@@ -1,7 +1,8 @@
 #!/usr/bin/with-contenv sh
 
-if [[ "`pidof -x $(basename $0) -o %PPID`" ]]; then
-  exit;
+ps -ef | grep `basename $0` | grep -v $$ > /dev/null
+if [ $? -eq 0 ]; then
+  exit
 fi
 
 s6-setuidgid abc cloudplow upload --loglevel INFO --logfile /rclone/cloudplow.log
