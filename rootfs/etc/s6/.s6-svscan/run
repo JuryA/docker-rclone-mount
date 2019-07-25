@@ -9,4 +9,5 @@ if [ ! "$(id -g abc)" -eq "$GID" ]; then
 fi
 
 chown -R abc:abc /rclone
+chown -R abc:abc /etc/s6
 
