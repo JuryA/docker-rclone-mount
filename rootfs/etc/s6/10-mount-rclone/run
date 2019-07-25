@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv sh
+
+if [ -z "$RCLONE_DRIVE" ]; then
+  echo "Error: RCLONE_DRIVE environment variable was not passed to the container."
+  exit 1
+fi
+
+if [ ! -f /rclone/.rclone.conf ]; then
+  echo "Error: /rclone/.rclone.conf does not exist. You have to pass it from the host."
+  exit 1
+fi
+
+mount_command="rclone mount --config=/rclone/.rclone.conf --allow-other $RCLONE_OPTIONS $RCLONE_DRIVE /rclone/data"
+
+echo "Executing => $mount_command"
+exec s6-setuidgid abc $mount_command
+

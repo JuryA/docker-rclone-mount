@@ -3,6 +3,8 @@ MAINTAINER bulzipke <bulzipke@naver.com>
 
 ENV UID=1000
 ENV GID=1000
+ENV RCLONE_DRIVE="Cache"
+ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates shadow s6
@@ -19,7 +21,7 @@ RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 WORKDIR /
 RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
-RUN mkdir -p /rclone/data /rclone/cache/tmp /rclone/cache/upload
+RUN mkdir -p /rclone/data
 
 COPY rootfs /
 

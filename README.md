@@ -6,11 +6,10 @@ Rclone Docker image based on Alpine Linux
         --cap-add SYS_ADMIN \
         --device /dev/fuse \
         --security-opt apparmor:unconfined \
-        -e RCLONE_REMOTE_MOUNT="Cache:" \
-        -e RCLONE_MOUNT_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes" \
-        -v /your_host_folder/.rclone.conf:/config/.rclone.conf \
-        -v /your_host_folder/cache:/cache \
-        -v /your_host_folder/data:/data:shared \
+        -e RCLONE_DRIVE="Cache:" \
+        -e RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes" \
+        -v /your_host_folder/rclone:/rclone \
+        -v /your_host_folder/rclone/data:/rclone/data:shared \
         -d bulzipke/rclone-mount:latest
 
 # Recommend .rclone.conf Sample:
@@ -29,11 +28,11 @@ Rclone Docker image based on Alpine Linux
     info_age = 1M
     chunk_total_size = 500G
     workers = 20
-    db_path = /cache
-    chunk_path = /cache/tmp
+    db_path = /rclone/cache
+    chunk_path = /rclone/cache
     rps = 10
     writes = false
-    tmp_upload_path = /cache/upload
+    tmp_upload_path = /rclone/cache/upload
     tmp_wait_time = 1h0m0s
     db_wait_time = 1m
     

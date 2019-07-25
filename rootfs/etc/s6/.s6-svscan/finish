@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv sh
+
+echo "aaaa"
+# unmount fuse
+if [ 1 -eq `ps -ef | grep abc | grep "rclone mount" | wc -l` ]; then
+  fusermount -u -z /rclone/remote
+fi
+
