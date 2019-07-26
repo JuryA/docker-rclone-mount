@@ -23,7 +23,7 @@ WORKDIR /
 RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
 RUN mkdir -p /rclone/data
 
-COPY rootfs /
+ADD rootfs /
 
 RUN apk del build-dependencies
 

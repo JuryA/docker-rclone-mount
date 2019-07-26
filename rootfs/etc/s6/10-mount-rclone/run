@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv sh
+#!/bin/sh
 
 if [ -z "$RCLONE_DRIVE" ]; then
   echo "Error: RCLONE_DRIVE environment variable was not passed to the container."
