@@ -7,7 +7,7 @@ ENV RCLONE_DRIVE="Cache"
 ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
 
 RUN apk update && apk upgrade
-RUN apk add fuse ca-certificates shadow s6
+RUN apk add fuse ca-certificates shadow s6 s6-linux-init
 RUN apk add --virtual build-dependencies wget curl unzip
 
 WORKDIR /root
@@ -27,4 +27,4 @@ ADD rootfs /
 
 RUN apk del build-dependencies
 
-ENTRYPOINT ["/bin/s6-svscan", "/etc/s6"]
+ENTRYPOINT ["/usr/bin/s6-linux-init"]
