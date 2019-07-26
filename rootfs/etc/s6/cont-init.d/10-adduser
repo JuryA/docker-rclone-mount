@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "aaa"
 if [ ! "$(id -u abc)" -eq "$UID" ]; then
   usermod -o -u "$UID" abc;
 fi
@@ -7,5 +8,3 @@ fi
 if [ ! "$(id -g abc)" -eq "$GID" ]; then
   groupmod -o -g "$GID" abc;
 fi
-
-chown -R abc:abc /rclone

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "aaaa"
+echo "cccc"
 # unmount fuse
 if [ 1 -eq `ps -ef | grep abc | grep "rclone mount" | wc -l` ]; then
   fusermount -u -z /rclone/remote

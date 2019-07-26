@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "bbb"
+chown -R abc:abc /rclone
