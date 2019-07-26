@@ -16,8 +16,8 @@ tar xfz s6-overlay.tar.gz -C / && \
 rm -rf s6-overlay.tar.gz
 
 ADD https://downloads.rclone.org/rclone-current-linux-amd64.zip /
-RUN mv rclone-*-linux-amd64/rclone /usr/bin/
-RUN rm -rf rclone*
+RUN mv /rclone-*-linux-amd64/rclone /usr/bin/
+RUN rm -rf /rclone*
 RUN chown root:root /usr/bin/rclone
 RUN chmod 755 /usr/bin/rclone
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
