@@ -8,7 +8,7 @@ ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
 
 RUN apk update && apk upgrade
 RUN apk add fuse ca-certificates shadow
-RUN apk add --virtual build-dependencies curl
+RUN apk add --virtual build-dependencies curl unzip
 
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
@@ -16,12 +16,9 @@ tar xfz s6-overlay.tar.gz -C / && \
 rm -rf s6-overlay.tar.gz
 
 ADD https://downloads.rclone.org/rclone-current-linux-amd64.zip /
-RUN pwd
-RUN ls -l 
-RUN echo "aaa"
-RUN ls -l /
-RUN mv /rclone-*-linux-amd64/rclone /usr/bin/
-RUN rm -rf /rclone*
+RUN unzip rclone-current-linux-amd64.zip
+RUN mv rclone-*-linux-amd64/rclone /usr/bin/
+RUN rm -rf rclone*
 RUN chown root:root /usr/bin/rclone
 RUN chmod 755 /usr/bin/rclone
 RUN sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
