@@ -14,7 +14,7 @@ curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/rele
 tar xfz s6-overlay.tar.gz -C / && \ 
 rm -rf s6-overlay.tar.gz
 
-ADD https://downloads.rclone.org/rclone-current-linux-amd64.zip
+ADD https://downloads.rclone.org/rclone-current-linux-amd64.zip /
 RUN mv rclone-*-linux-amd64/rclone /usr/bin/
 RUN rm -rf rclone*
 RUN chown root:root /usr/bin/rclone
