@@ -16,6 +16,10 @@ tar xfz s6-overlay.tar.gz -C / && \
 rm -rf s6-overlay.tar.gz
 
 ADD https://downloads.rclone.org/rclone-current-linux-amd64.zip /
+RUN pwd
+RUN ls -l 
+RUN echo "aaa"
+RUN ls -l /
 RUN mv /rclone-*-linux-amd64/rclone /usr/bin/
 RUN rm -rf /rclone*
 RUN chown root:root /usr/bin/rclone
