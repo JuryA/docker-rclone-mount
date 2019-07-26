@@ -24,7 +24,7 @@ RUN addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000
 RUN mkdir -p /rclone/data
 
 COPY rootfs /
-RUN chmod -R +x /etc/s6/* && chown +x /etc/s6/.s6-svscan/*
+RUN chmod -R +x /etc/s6/* && chmod +x /etc/s6/.s6-svscan/*
 
 RUN apk del build-dependencies
 
