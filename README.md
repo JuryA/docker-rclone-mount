@@ -1,4 +1,6 @@
 # docker-rclone-mount
+[![](https://images.microbadger.com/badges/version/bulzipke/rclone-mount.svg)](https://microbadger.com/images/bulzipke/rclone-mount) [![](https://images.microbadger.com/badges/image/bulzipke/rclone-mount.svg)](https://microbadger.com/images/bulzipke/rclone-mount)
+
 Rclone Docker image based on Alpine Linux
 
 # Usage Example:
