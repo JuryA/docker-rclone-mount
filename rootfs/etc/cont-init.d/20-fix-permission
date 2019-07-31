@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv sh
 
+mkdir -p /rclone/logs
 mkdir -p /rclone/cloud
 mkdir -p /rclone/local
 
