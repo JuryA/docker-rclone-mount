@@ -7,7 +7,7 @@ ENV RCLONE_DRIVE="Cache"
 ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
 ENV UPLOAD_PERIOD="*/1 * * * *"
 
-RUN apk add --no-cache --update fuse ca-certificates shadow git python3 libgcc libstdc++ && \
+RUN apk add --no-cache --update fuse ca-certificates shadow git python3 libgcc libstdc++ jq && \
 	apk add --virtual build-dependencies curl unzip build-base linux-headers && \
 	S6_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 	curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-amd64.tar.gz" && \
