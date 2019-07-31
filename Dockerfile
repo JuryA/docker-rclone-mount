@@ -6,7 +6,7 @@ ENV GID=1000
 ENV RCLONE_DRIVE="GoogleDrive"
 ENV RCLONE_CACHE="Cache"
 ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
-ENV UPLOAD_PERIOD="*/1 * * * *"
+ENV UPLOAD_PERIOD="0 5 * * *"
 
 RUN apk add --no-cache --update fuse ca-certificates shadow git python3 libgcc libstdc++ jq coreutils && \
 	apk add --virtual build-dependencies curl unzip build-base linux-headers && \
