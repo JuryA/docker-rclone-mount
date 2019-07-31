@@ -8,11 +8,19 @@ ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
 ENV UPLOAD_PERIOD="*/1 * * * *"
 
 RUN apk add --no-cache --update fuse ca-certificates shadow git python3 && \
-	apk add --virtual build-dependencies curl unzip && \
+	apk add --virtual build-dependencies curl unzip build-base linux-headers && \
 	S6_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 	curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-amd64.tar.gz" && \
 	tar xfz s6-overlay.tar.gz -C / && \ 
 	rm -rf s6-overlay.tar.gz && \
+	MERGERFS_VERSION=$(curl -sX GET "https://api.github.com/repos/trapexit/mergerfs/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
+	curl -o mergerfs.tar.gz -L "https://github.com/trapexit/mergerfs/releases/download/${MERGERFS_VERSION}/mergerfs-${MERGERFS_VERSION}.tar.gz" && \
+	tar xfz mergerfs.tar.gz && \
+	rm -rf mergerfs.tar.gz && \
+	make -C mergerfs* && \
+	mv mergerfs*/build/mergerfs /usr/bin/mergerfs && \
+	rm -rf mergerfs* && \
+	chmod 755 /usr/bin/mergerfs && \
 	curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip && \
 	unzip rclone-current-linux-amd64.zip && \
 	mv rclone-*-linux-amd64/rclone /usr/bin/ && \
