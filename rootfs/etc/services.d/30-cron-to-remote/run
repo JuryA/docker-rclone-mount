@@ -30,7 +30,7 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 \"--user-agent\":\"Mozilla/5.0\ \(Macintosh\;\ Intel\ Mac\ OS\ X\ 10_14_4\)\ AppleWebKit/537.36\ \(KHTML,\ like\ Gecko\)\ Chrome/74.0.3729.131\ Safari/537.36\",\
 \"--verbose\":1},\
 \"upload_folder\":\"/rclone/local\",\
-\"upload_remote\":\"$RCLONE_DRIVE\:"\
+\"upload_remote\":\"$RCLONE_DRIVE:\"\
 }} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   
   jq .uploader={\"$RCLONE_DRIVE\":{\
