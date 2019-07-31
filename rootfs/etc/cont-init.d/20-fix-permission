@@ -4,3 +4,4 @@ mkdir -p /rclone/cloud
 mkdir -p /rclone/local
 
 chown -R abc:abc /rclone
+chown -R abc:abc /opt/cloudplow
