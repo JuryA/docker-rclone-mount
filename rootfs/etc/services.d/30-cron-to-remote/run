@@ -1,0 +1,48 @@
+#!/usr/bin/with-contenv sh
+
+CLOUDPLOW_CONFIG="/opt/cloudplow/config.json"
+
+while [ 0 -eq `ps -ef | grep abc | grep mergerfs | wc -l` ]; do
+  sleep 1
+done
+
+if [ ! -f $CLOUDPLOW_CONFIG ]; then
+  echo "First run initializing cloudplow..."
+  s6-setuidgid abc cloudplow run
+  jq .core.rclone_binary_path="\"/usr/bin/rclone\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  jq .hidden={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+
+  jq .remotes={\"$RCLONE_DRIVE\":{\
+\"rclone_excludes\":[],\
+\"rclone_sleeps\":{},\
+\"rclone_command\":\"move\",\
+\"remove_empty_dir_depth\":1,\
+\"rclone_extras\":{\
+\"--checkers\":16,\
+\"--drive-chunk-size\":\"64M\",\
+\"--skip-links\":null,\
+\"--delete-empty-src-dirs\":null,\
+\"--fast-list\":null,\
+\"--stats\":\"60s\",\
+\"--transfers\":8,\
+\"--user-agent\":\"Mozilla/5.0\ \(Macintosh\;\ Intel\ Mac\ OS\ X\ 10_14_4\)\ AppleWebKit/537.36\ \(KHTML,\ like\ Gecko\)\ Chrome/74.0.3729.131\ Safari/537.36\",\
+\"--verbose\":1},\
+\"upload_folder\":\"/rclone/local\",\
+\"upload_remote\":\"$RCLONE_DRIVE:\"\
+}} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  
+  jq .uploader={\"$RCLONE_DRIVE\":{\
+\"check_interval\":30,\
+\"exclude_open_files\":true,\
+\"max_size_gb\":100,\
+\"size_excludes\":[]\
+}} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
+  
+  chown abc:abc $CLOUDPLOW_CONFIG
+fi
+
+echo "$UPLOAD_PERIOD /usr/bin/upload2remote" > /var/spool/cron/crontabs/root
+
+echo "Executing mergerfs with crond for remote upload"
+exec crond -f

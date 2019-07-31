@@ -5,8 +5,9 @@ ENV UID=1000
 ENV GID=1000
 ENV RCLONE_DRIVE="Cache"
 ENV RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes"
+ENV UPLOAD_PERIOD="*/1 * * * *"
 
-RUN apk add --no-cache --update fuse ca-certificates shadow && \
+RUN apk add --no-cache --update fuse ca-certificates shadow git python3 && \
 	apk add --virtual build-dependencies curl unzip && \
 	S6_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
 	curl -o s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-amd64.tar.gz" && \
@@ -21,6 +22,10 @@ RUN apk add --no-cache --update fuse ca-certificates shadow && \
 	sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf && \
 	addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000 && \
 	mkdir -p /rclone/data && \
+	git clone https://github.com/l3uddz/cloudplow /opt/cloudplow && \
+	pip3 install --upgrade pip && \
+	pip3 install --upgrade -r /opt/cloudplow/requirements.txt && \
+	ln -s /opt/cloudplow/cloudplow.py /usr/local/bin/cloudplow && \
 	apk del build-dependencies
 
 ADD rootfs /

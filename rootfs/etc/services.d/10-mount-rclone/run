@@ -10,7 +10,7 @@ if [ ! -f /rclone/.rclone.conf ]; then
   exit 1
 fi
 
-mount_command="rclone mount --config=/rclone/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other $RCLONE_OPTIONS $RCLONE_DRIVE /rclone/data"
+mount_command="rclone mount --config=/rclone/.rclone.conf --cache-dir /home/abc/.cache/rclone/ --allow-other $RCLONE_OPTIONS $RCLONE_DRIVE /rclone/cloud"
 
 echo "Executing => $mount_command"
 exec s6-setuidgid abc $mount_command
