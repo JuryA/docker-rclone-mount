@@ -21,7 +21,9 @@ RUN apk add --no-cache --update fuse ca-certificates shadow git python3 && \
 	chmod 755 /usr/bin/rclone && \
 	sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf && \
 	addgroup -S abc -g 1000 && adduser -S abc -G abc -u 1000 && \
-	mkdir -p /rclone/cloud /rclone/local /rclone/data && \
+	mkdir -p /rclone/cloud && \
+	mkdir -p /rclone/local && \
+	mkdir -p /rclone/data && \
 	git clone https://github.com/l3uddz/cloudplow /opt/cloudplow && \
 	pip3 install --upgrade pip && \
 	pip3 install --upgrade -r /opt/cloudplow/requirements.txt && \
