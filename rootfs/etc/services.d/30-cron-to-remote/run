@@ -13,7 +13,8 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
   jq .core.rclone_config_path="\"/rclone/.rclone.conf\"" $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   jq .hidden={} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
 
-  jq .remotes={\"$RCLONE_DRIVE\":{\
+
+  jq .remotes={\"${RCLONE_DRIVE::-1}\":{\
 \"rclone_excludes\":[],\
 \"rclone_sleeps\":{},\
 \"rclone_command\":\"move\",\
@@ -29,10 +30,10 @@ if [ ! -f $CLOUDPLOW_CONFIG ]; then
 \"--user-agent\":\"Mozilla/5.0\ \(Macintosh\;\ Intel\ Mac\ OS\ X\ 10_14_4\)\ AppleWebKit/537.36\ \(KHTML,\ like\ Gecko\)\ Chrome/74.0.3729.131\ Safari/537.36\",\
 \"--verbose\":1},\
 \"upload_folder\":\"/rclone/local\",\
-\"upload_remote\":\"$RCLONE_DRIVE:\"\
+\"upload_remote\":\"$RCLONE_DRIVE\"\
 }} $CLOUDPLOW_CONFIG > tmp.$$.json && mv tmp.$$.json $CLOUDPLOW_CONFIG
   
-  jq .uploader={\"$RCLONE_DRIVE\":{\
+  jq .uploader={\"${RCLONE_DRIVE::-1}\":{\
 \"check_interval\":30,\
 \"exclude_open_files\":true,\
 \"max_size_gb\":100,\
