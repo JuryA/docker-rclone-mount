@@ -1,3 +1,6 @@
 #!/usr/bin/with-contenv sh
 
+mkdir -p /rclone/cloud
+mkdir -p /rclone/local
+
 chown -R abc:abc /rclone
