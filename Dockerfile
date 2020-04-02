@@ -3,7 +3,7 @@ MAINTAINER bulzipke <bulzipke@naver.com>
 
 ENV UID=1000
 ENV GID=1000
-ENV RCLONE_DRIVE="GoogleDrive:"
+ENV RCLONE_DRIVE="Cache:"
 
 RUN apk update && apk upgrade
 RUN apk add fuse
