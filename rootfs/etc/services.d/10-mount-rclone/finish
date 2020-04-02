@@ -2,5 +2,5 @@
 
 # unmount fuse
 if [ 1 -eq `ps -ef | grep abc | grep "rclone mount" | wc -l` ]; then
-  fusermount -u -z /rclone/remote
+  fusermount -u -z /rclone/data
 fi
