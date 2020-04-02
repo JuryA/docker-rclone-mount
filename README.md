@@ -6,9 +6,9 @@ Rclone Docker image based on Alpine Linux
         --cap-add SYS_ADMIN \
         --device /dev/fuse \
         --security-opt apparmor:unconfined \
-        -e RCLONE_REMOTE="GoogleDrive:" \
-        -e RCLONE_OPTIONS="--buffer-size 1G --dir-cache-time 96h --drive-chunk-size 32M --timeout 1h" \
-        -v /your_host_folder/rclone:/rclone \
+        -e RCLONE_DRIVE="Cache:" \
+        -e RCLONE_OPTIONS="--fast-list --umask=7 --vfs-cache-mode writes" \
+        -v /your_host_folder/rclone:/rclone:slave \
         -d bulzipke/rclone-mount:experimental
 
 # Recommend .rclone.conf Sample:
@@ -18,6 +18,21 @@ Rclone Docker image based on Alpine Linux
     client_secret = your_client_secret
     scope = drive
     token = your_token
+    
+    [Cache]
+    type = cache
+    remote = GoogleDrive:
+    chunk_size = 1M
+    info_age = 1M
+    chunk_total_size = 10G
+    workers = 20
+    db_path = /rclone/cache
+    chunk_path = /rclone/cache
+    rps = 10
+    writes = true
+    tmp_upload_path = /rclone/cache/upload
+    tmp_wait_time = 1h0m0s
+    db_wait_time = 1m
 
 ### Reference   
 * [animosity22/homescripts][0]
