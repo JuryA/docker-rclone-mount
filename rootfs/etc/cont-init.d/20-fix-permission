@@ -1,8 +1,4 @@
 #!/usr/bin/with-contenv sh
 
-mkdir -p $RCLONE_REMOTE_MOUNT
-mkdir -p $MERGERFS_LOCAL_MOUNT
-mkdir -p $DATA_MOUNT
-
+mkdir -p /rclone/data
 chown -R abc:abc /rclone
-chown -R abc:abc /opt/cloudplow
