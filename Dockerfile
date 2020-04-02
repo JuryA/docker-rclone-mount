@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM arm32v6/alpine
 MAINTAINER bulzipke <bulzipke@naver.com>
 
 ENV UID=1000
