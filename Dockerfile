@@ -1,7 +1,5 @@
-FROM arm32v7/alpine:latest
+FROM alpine:latest
 MAINTAINER bulzipke <bulzipke@naver.com>
-
-ENV ARCH=armv7
 
 ENV UID=1000
 ENV GID=1000
