@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv sh
 
+useradd abc
+
 if [ ! "$(id -u abc)" -eq "$UID" ]; then
   usermod -o -u "$UID" abc;
 fi
